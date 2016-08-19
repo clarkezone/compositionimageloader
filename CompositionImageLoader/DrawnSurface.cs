@@ -45,7 +45,7 @@ class DrawnSurface : IDrawnSurface
 
     private IImageLoaderInternal _imageLoader;
     private CompositionDrawingSurface _surface;
-    private CanvasDrawingSession _drawProgram;
+    private Action<CanvasDrawingSession> _drawProgram;
 
     private float _width;
     private float _height;
@@ -119,7 +119,7 @@ class DrawnSurface : IDrawnSurface
     public DrawnSurface(IImageLoaderInternal imageLoader,
                        float width,
                        float height,
-                       CanvasDrawingSession drawProgram
+                       Action<CanvasDrawingSession> drawProgram
                        )
     {
         Initialize(imageLoader,
@@ -132,17 +132,18 @@ class DrawnSurface : IDrawnSurface
     #region Public Methods
     public void RedrawSurface()
     {
-        _imageLoader.DoWorkUnderLock(() =>
-        {
-            CanvasComposition.Resize(_surface, new Size(_width, _height));
-
-            using (var session = CanvasComposition.CreateDrawingSession(_surface))
-            {
-            }
-        });
-
         Task.Run(() =>
         {
+            _imageLoader.DoWorkUnderLock(() =>
+            {
+                CanvasComposition.Resize(_surface, new Size(_width, _height));
+
+                using (var session = CanvasComposition.CreateDrawingSession(_surface))
+                {
+                    _drawProgram(session);
+                }
+            });
+
             if (SurfaceRedrawn != null)
             {
                 RaiseSurfaceRedrawnEvent();
@@ -164,7 +165,7 @@ class DrawnSurface : IDrawnSurface
     private void Initialize(IImageLoaderInternal imageLoader,
              float width,
                                 float height,
-                                CanvasDrawingSession drawProgram
+                                Action<CanvasDrawingSession> drawProgram
         )
     {
         _drawProgram = drawProgram;
