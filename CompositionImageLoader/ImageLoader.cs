@@ -39,6 +39,9 @@ namespace Robmikh.Util.CompositionImageLoader
                                        Padding padding,
                                        Color foreground,
                                        Color background);
+        //IDrawnSurface CreateDrawnSurface(float width,
+        //                                 float height,
+        //                                 CanvasDrawingSession drawProgram);
         CompositionDrawingSurface LoadImageFromBytes([ReadOnlyArray()] byte[] bytes, int widthInPixels, int heightInPixels);
         CompositionDrawingSurface LoadImageFromBytes([ReadOnlyArray()] byte[] bytes, int widthInPixels, int heightInPixels, Size size);
         CompositionDrawingSurface CreateSurface(Size size);
@@ -282,6 +285,21 @@ namespace Robmikh.Util.CompositionImageLoader
 
             return textSurface;
         }
+
+        //public IDrawnSurface CreateDrawnSurface(float width,
+        //                                        float height,
+        //                                        CanvasDrawingSession drawProgram)
+        //{
+        //    var drawnSurface = new DrawnSurface(this,
+        //        width,
+        //        height,
+        //        drawProgram
+        //        );
+
+        //    drawnSurface.RedrawSurface();
+
+        //    return drawnSurface;
+        //}
 
         public CompositionDrawingSurface LoadImageFromBytes(byte[] bytes, int widthInPixels, int heightInPixels)
         {

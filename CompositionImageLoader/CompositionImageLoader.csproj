@@ -108,6 +108,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawnSurface.cs" />
     <Compile Include="ImageLoader.cs" />
     <Compile Include="ManagedSurface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MSBuildTasks": "1.4.0.128",
-    "Win2D.uwp": "1.16.0"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "MSBuildTasks": "1.5.0.196",
+    "Win2D.uwp": "1.19.0"
   },
   "frameworks": {
     "uap10.0": {}
